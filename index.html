@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cruzadinha de Arquitetura Computacional</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Cruzadinha de Arquitetura Computacional</h1>
+      <div class="status" id="status">0 de 12 palavras</div>
+    </header>
+
+    <main class="main">
+      <section class="board-area">
+        <div id="board" class="board" aria-label="Tabuleiro da cruzadinha"></div>
+        <div class="controls">
+          <button id="checkBtn" class="btn">Conferir</button>
+          <button id="resetBtn" class="btn">Reiniciar</button>
+        </div>
+      </section>
+
+      <aside class="clues">
+        <div class="clue-block">
+          <h2>Horizontais</h2>
+          <ol id="acrossList"></ol>
+        </div>
+        <div class="clue-block">
+          <h2>Verticais</h2>
+          <ol id="downList"></ol>
+        </div>
+      </aside>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

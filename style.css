@@ -1,0 +1,123 @@
+:root{
+  --bg:#0f1720;
+  --card:#0b1220;
+  --muted:#94a3b8;
+  --accent:#0ea5a4;
+  --cell:#0f1726;
+  --cell-border:#263244;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,#071024 0%, #071827 100%);
+  color:#e6eef6;
+  padding:24px;
+}
+.site-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+}
+.site-header h1{
+  font-size:20px;
+  margin:0;
+  letter-spacing:0.3px;
+}
+.status{
+  color:var(--muted);
+  font-size:14px;
+}
+.main{
+  display:grid;
+  grid-template-columns: 1fr 320px;
+  gap:20px;
+}
+.board-area{
+  background:rgba(255,255,255,0.02);
+  border-radius:10px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.board{
+  display:grid;
+  gap:4px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  padding:8px;
+  border-radius:8px;
+}
+.controls{
+  margin-top:12px;
+  display:flex;
+  gap:8px;
+}
+.btn{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.clues{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.clue-block{
+  background:rgba(255,255,255,0.02);
+  padding:12px;
+  border-radius:8px;
+}
+.clue-block h2{margin:0 0 8px 0;font-size:16px}
+.clue-block ol{margin:0;padding-left:20px;color:var(--muted)}
+
+.cell{
+  width:44px;
+  height:44px;
+  background:var(--cell);
+  border:1px solid var(--cell-border);
+  border-radius:6px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cell .cell-number{
+  position:absolute;
+  top:4px;
+  left:6px;
+  font-size:10px;
+  color:var(--muted);
+}
+.cell input{
+  width:100%;
+  height:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#e6eef6;
+  font-weight:700;
+  font-size:18px;
+  text-align:center;
+  text-transform:uppercase;
+}
+.cell.blocked{
+  background:#08111a;
+  border-radius:6px;
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .main{grid-template-columns:1fr}
+  .clues{flex-direction:row;overflow:auto}
+  .clue-block{min-width:200px}
+  .cell{width:36px;height:36px}
+}
