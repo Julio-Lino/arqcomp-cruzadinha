@@ -1,38 +1,137 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cruzadinha de Arquitetura Computacional</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <h1>Cruzadinha de Arquitetura Computacional</h1>
-      <div class="status" id="status">0 de 12 palavras</div>
-    </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#092847">
+  <title>NexusOS — Operação Zero-Day</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="boot-screen" id="bootScreen" role="status" aria-live="polite">
+    <div class="boot-mark"><span class="win-logo boot-win"><i></i><i></i><i></i><i></i></span></div>
+    <h2>NexusOS</h2>
+    <p id="bootMessage">Iniciando estação de acesso...</p>
+    <div class="boot-progress"><span id="bootProgress"></span></div>
+    <small>Operação Zero-Day • Ambiente de treinamento</small>
+    <button id="skipBoot" type="button">Pular inicialização</button>
+  </div>
+  <div class="desktop" id="desktop">
+    <div class="wallpaper-glow"></div>
+    <div class="desktop-icons" aria-label="Atalhos da área de trabalho">
+      <button class="desktop-icon" data-open="explorer"><span class="desktop-glyph">💻</span><span>Este Computador</span></button>
+      <button class="desktop-icon" data-open="explorer"><span class="desktop-glyph">📁</span><span>Arquivos Nexus</span></button>
+      <button class="desktop-icon" data-open="game"><span class="desktop-glyph">🧩</span><span>Descriptografador</span></button>
+      <button class="desktop-icon" data-open="terminal"><span class="desktop-glyph icon-terminal">›_</span><span>Terminal</span></button>
+      <button class="desktop-icon" data-open="vpn"><span class="desktop-glyph">🛡️</span><span>VPN Nexus</span></button>
+      <button class="desktop-icon" data-open="browser"><span class="desktop-glyph chrome-icon" aria-hidden="true">🌐</span><span>Chrome</span></button>
+      <button class="desktop-icon" data-open="notes"><span class="desktop-glyph">📝</span><span>Instruções.txt</span></button>
+    </div>
 
-    <main class="main">
-      <section class="board-area">
-        <div id="board" class="board" aria-label="Tabuleiro da cruzadinha"></div>
-        <div class="controls">
-          <button id="checkBtn" class="btn">Conferir</button>
-          <button id="resetBtn" class="btn">Reiniciar</button>
+    <section class="os-window game-window hidden-window" id="window-game" data-window="game" aria-label="Aplicativo de cruzadinha">
+      <div class="titlebar" data-drag="game">
+        <div class="window-title"><span>🧩</span> Descriptografador — Firewall Nexus</div>
+        <div class="window-actions"><button data-min="game" title="Minimizar" aria-label="Minimizar cruzadinha">─</button><button data-max="game" title="Maximizar" aria-label="Maximizar cruzadinha">□</button><button data-close="game" title="Fechar" aria-label="Fechar cruzadinha">×</button></div>
+      </div>
+      <div class="app-toolbar"><span class="chip">● CONEXÃO SIMULADA</span><span>MISSÃO: ACESSAR ARQUIVOS CONFIDENCIAIS</span></div>
+      <div class="game-content">
+        <header class="game-heading"><div><p class="overline">BANCO NEXUS // OPERAÇÃO ZERO-DAY</p><h1>Firewall de hardware</h1><p>Decifre as 16 palavras da cruzadinha. Cada pasta indica exatamente o número e a direção da próxima resposta. Peça dicas extras com cuidado: aos 100% de rastreamento, você perde.</p></div><div class="score-panel"><small>CHAVES DECIFRADAS</small><strong id="score">0 de 16 palavras</strong></div></header>
+        <div id="stageGuide" class="stage-guide" aria-live="polite">MISSÃO 01 DE 16 • Abra BOAS-VINDAS para localizar a primeira resposta.</div><div class="game-layout">
+          <div class="puzzle-area"><div class="board-frame"><div id="crossword" class="crossword" aria-label="Tabuleiro de cruzadinha"></div></div><div id="activeHint" class="active-hint">Selecione uma pista ou clique em uma casa para escrever.</div><div class="buttons"><button id="checkButton" class="primary">✓ Conferir</button><button id="resetButton" class="secondary">↻ Reiniciar</button><button id="hintButton" class="secondary">💡 Dica extra (+8%)</button><button id="soundButton" class="secondary compact" aria-pressed="true">♫ Som ligado</button></div><div id="feedback" class="feedback" aria-live="polite">Abra BOAS-VINDAS no Explorador. A pasta informa o número e a direção da palavra atual.</div><div id="extraHint" class="extra-hint" aria-live="polite">A ajuda extra aparecerá aqui quando solicitada.</div><div class="tracking"><div><span>Rastreamento da polícia • 100% = derrota</span><strong id="trackingText">0%</strong></div><div class="tracking-track" id="trackingBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="trackingFill"></div></div></div></div>
+          <aside class="clues-area"><div class="clues-title">📋 Pistas do firewall</div><h2>→ Horizontais</h2><div id="horizontalClues" class="clue-list"></div><h2>↓ Verticais</h2><div id="verticalClues" class="clue-list"></div></aside>
         </div>
-      </section>
+      </div>
+      <div class="statusbar"><span>16 chaves criptografadas • Sem conexão com bancos reais</span><span>HTML + CSS + JS</span></div>
+    </section>
 
-      <aside class="clues">
-        <div class="clue-block">
-          <h2>Horizontais</h2>
-          <ol id="acrossList"></ol>
-        </div>
-        <div class="clue-block">
-          <h2>Verticais</h2>
-          <ol id="downList"></ol>
-        </div>
-      </aside>
-    </main>
+    <section class="os-window explorer-window hidden-window" id="window-explorer" data-window="explorer" aria-label="Explorador de arquivos">
+      <div class="titlebar" data-drag="explorer"><div class="window-title"><span>📁</span> Explorador de Arquivos</div><div class="window-actions"><button data-min="explorer" title="Minimizar" aria-label="Minimizar explorador">─</button><button data-max="explorer" title="Maximizar" aria-label="Maximizar explorador">□</button><button data-close="explorer" title="Fechar" aria-label="Fechar explorador">×</button></div></div>
+      <div class="explorer-ribbon"><button id="explorerHome">⌂ Início</button><span class="breadcrumb">Este Computador › Banco Nexus (N:) › <strong>Confidencial</strong></span></div>
+      <div class="explorer-body"><nav class="explorer-sidebar"><div>🏠 Início</div><div>🖥️ Este Computador</div><div class="active">📁 Banco Nexus (N:)</div><div class="inset">📂 Confidencial</div><div>🔒 Cofre do gerente</div></nav><div class="explorer-main"><div class="explorer-head"><h2>Confidencial</h2><span id="folderCount">0 de 16 liberadas</span></div><p class="folder-explanation">Abra BOAS-VINDAS. Cada pasta informa a posição, número, direção e dica da próxima palavra. Abrir pastas não aumenta o rastreamento.</p><div class="folder-grid" id="folders"></div><div class="preview" id="folderPreview"><div class="preview-empty">📄<strong>Selecione uma pasta liberada</strong><span>Os documentos aparecem aqui, como no Explorador do Windows.</span></div></div></div></div>
+      <div class="statusbar"><span id="explorerStatus">17 itens • 16 protegidos</span><span>Disco local fictício (N:)</span></div>
+    </section>
 
-    <script src="script.js" defer></script>
-  </body>
+    <section class="os-window terminal-window hidden-window" id="window-terminal" data-window="terminal" aria-label="Terminal do sistema">
+      <div class="titlebar terminal-title" data-drag="terminal"><div class="window-title">›_ Windows Terminal — Banco Nexus</div><div class="window-actions"><button data-min="terminal">─</button><button data-max="terminal">□</button><button data-close="terminal">×</button></div></div>
+      <div class="terminal-content"><p>Microsoft Windows [Simulação NexusOS]</p><p>(c) Operação Zero-Day — Ambiente educacional.</p><p class="term-cyan">C:\Users\Hacker&gt; iniciar_missao.exe</p><div id="logs" class="terminal-logs" role="log" aria-live="polite"><div><span>[SISTEMA]</span> Servidor fictício localizado.</div><div><span>[MISSÃO]</span> Desbloqueie o servidor com as 16 chaves.</div></div><p class="cursor-line">C:\Nexus\ZeroDay&gt; <span class="cursor">▌</span></p></div>
+    </section>
+
+    <section class="os-window notes-window hidden-window" id="window-notes" data-window="notes" aria-label="Bloco de Notas com instruções"><div class="titlebar" data-drag="notes"><div class="window-title">📝 Instruções.txt — Bloco de Notas</div><div class="window-actions"><button data-min="notes">─</button><button data-max="notes">□</button><button data-close="notes">×</button></div></div><div class="notepad-content">
+        <h2>INSTRUÇÕES.txt — LEIA ANTES DE JOGAR</h2>
+        <p><strong>MISSÃO: OPERAÇÃO ZERO-DAY</strong></p>
+        <p>Você é um hacker da Operação Zero-Day. Sua missão é acessar os arquivos sigilosos do Banco Nexus usando 16 chaves escondidas numa cruzadinha de componentes de computador. Cuidado: o sistema registra seus erros e pedidos de ajuda. Se o rastreamento chegar a 100%, você perde!</p>
+        <p><strong>1. COMO COMEÇAR</strong></p>
+        <p>Ao terminar de ler este arquivo, feche ou minimize esta janela. Na área de trabalho, abra <strong>Arquivos Nexus</strong> (Explorador de Arquivos) e selecione a pasta <strong>BOAS-VINDAS</strong>.</p>
+        <p><strong>2. COMO FUNCIONAM AS PASTAS</strong></p>
+        <p>BOAS-VINDAS mostra a primeira dica. Cada vez que você acerta uma palavra, uma nova pasta é liberada. A pasta seguinte mostra a pista da próxima palavra, seu número, direção (horizontal ou vertical), linha e coluna iniciais e quantidade de letras. <strong>Abrir pastas não aumenta o rastreamento.</strong></p>
+        <p><strong>3. COMO RESPONDER À CRUZADINHA</strong></p>
+        <p>Abra o aplicativo <strong>Descriptografador</strong>. Clique na pista indicada ou nas casas correspondentes e digite uma letra por quadradinho. Use as setas para navegar, Backspace para apagar e Espaço para trocar de direção nos cruzamentos. As respostas não têm espaços ou acentos. Clique em <strong>Conferir</strong> para validar a palavra atual.</p>
+        <p><strong>4. PRECISA DE AJUDA? USE A VPN E O CHROME</strong></p>
+        <p>Abra o aplicativo <strong>VPN Nexus</strong> e resolva o desafio sobre uma porta de rede. <strong>A resposta não aparece neste arquivo: você precisa descobri-la!</strong> Depois de estabelecer a conexão simulada, abra o <strong>Chrome</strong> para consultar dicas muito fáceis, com exemplos do dia a dia e primeiras letras. Se não souber a porta, observe o serviço indicado na VPN e use seu conhecimento ou pesquise fora do jogo.</p>
+        <p><strong>5. CUIDADO COM O RASTREAMENTO</strong></p>
+        <p>O terminal registra suas ações. Abrir pastas custa <strong>0%</strong>; cada dica do Chrome custa <strong>2%</strong> (apenas uma cobrança por etapa); pedir uma dica extra no Descriptografador custa <strong>8%</strong>; conferir a palavra errada custa <strong>10%</strong>; errar a resposta da VPN custa <strong>5%</strong>. Ao chegar a <strong>100%</strong>, você é descoberto e <strong>PERDE</strong> a partida.</p>
+        <p><strong>6. COMO VENCER OU RECOMEÇAR</strong></p>
+        <p>Resolva as <strong>16 palavras</strong> da cruzadinha para desbloquear todos os arquivos confidenciais e concluir a invasão simulada. Se quiser voltar ao início, clique em <strong>Reiniciar</strong> no Descriptografador. Se perder, escolha <strong>Tentar novamente</strong>.</p>
+        <p><strong>7. DICAS IMPORTANTES</strong></p>
+        <p>Você não precisa saber informática antes de jogar: leia as pistas simples das pastas e use o Chrome caso precise. Fechar uma janela não apaga o progresso. O jogo é educativo e roda localmente no navegador; o banco, a VPN, o Chrome e os arquivos são apenas simulações.</p>
+        <p><strong>BOA SORTE, HACKER! 💻</strong></p>
+      </div></section>
+
+
+    <section class="os-window vpn-window hidden-window" id="window-vpn" data-window="vpn" aria-label="VPN Nexus">
+      <div class="titlebar" data-drag="vpn"><div class="window-title">🛡️ VPN Nexus — Autenticação de rede</div><div class="window-actions"><button data-min="vpn" aria-label="Minimizar VPN">─</button><button data-max="vpn" aria-label="Maximizar VPN">□</button><button data-close="vpn" aria-label="Fechar VPN">×</button></div></div>
+      <div class="vpn-content">
+        <div class="vpn-shield">🛡️</div><h2>VPN NEXUS</h2>
+        <p class="vpn-description">Estabeleça a conexão educativa para desbloquear o navegador de pesquisa.</p>
+        <div class="vpn-state" id="vpnState">🔴 DESCONECTADA · Chrome bloqueado</div>
+        <label for="vpnService">Escolha o serviço que deseja acessar:</label>
+        <select id="vpnService"><option value="mysql">Banco de dados MySQL (usado pelo Workbench)</option><option value="http">Servidor web de desenvolvimento em localhost</option></select>
+        <p class="vpn-question" id="vpnQuestion">Qual é a porta padrão do MySQL, geralmente usada na conexão pelo Workbench?</p>
+        <label for="vpnPort">Porta da conexão</label>
+        <input type="text" inputmode="numeric" id="vpnPort" maxlength="5" placeholder="Digite a porta (ex.: 0000)" autocomplete="off">
+        <button type="button" class="primary" id="vpnConnect">🔐 Conectar à VPN</button>
+        <p id="vpnFeedback" class="vpn-feedback" aria-live="polite">Dica: portas são números que identificam serviços de rede.</p>
+        <small>Conexão apenas simulada. Nenhuma rede ou VPN real é acessada.</small>
+      </div>
+    </section>
+
+    <section class="os-window browser-window hidden-window" id="window-browser" data-window="browser" aria-label="Navegador Chrome simulado">
+      <div class="titlebar" data-drag="browser"><div class="window-title">🌐 Chrome — Nexus Pesquisa</div><div class="window-actions"><button data-min="browser" aria-label="Minimizar navegador">─</button><button data-max="browser" aria-label="Maximizar navegador">□</button><button data-close="browser" aria-label="Fechar navegador">×</button></div></div>
+      <div class="browser-toolbar"><span class="browser-nav">‹ &nbsp; › &nbsp; ↻</span><div class="browser-url">🔒 nexus-pesquisa.local / arquitetura-computacional</div><span>⋮</span></div>
+      <div class="browser-content">
+        <div class="browser-brand">Nexus<span>Busca</span></div>
+        <p>Central de consulta de hardware · Modo treinamento</p>
+        <div class="browser-search">🔎 <span id="browserSearchText">Como descobrir o componente da próxima pista?</span></div>
+        <div class="browser-lock" id="browserLock">
+          <div class="browser-lock-icon">🔒</div><h2>Pesquisa protegida</h2>
+          <p>Para acessar as dicas simplificadas, abra o aplicativo <strong>VPN Nexus</strong> e responda à pergunta sobre a porta de conexão.</p>
+          <button class="primary" type="button" id="browserGoVPN">Abrir VPN Nexus</button>
+        </div>
+        <div class="browser-results hidden" id="browserResults">
+          <div class="browser-result-label">RESULTADO DE PESQUISA · PISTA ATUAL</div>
+          <h2 id="browserStage">Etapa 01</h2>
+          <p id="browserSummary"></p>
+          <div class="browser-tip-card"><strong>💡 Dica mais fácil</strong><p id="browserTipPreview">Uma dica bem simples, com exemplo e primeiras letras da resposta, aparece aqui.</p></div>
+          <div class="browser-actions"><button type="button" class="primary" id="browserReveal">Ver dica super fácil (+2% de rastreamento)</button><button type="button" class="secondary" id="browserSolve">Ir para a cruzadinha</button></div>
+          <p class="browser-hint-note">Cada dica do Chrome aumenta somente 2% do rastreamento (máximo de 32% nas 16 palavras). Aos 100%, a operação termina.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="start-menu hidden" id="startMenu"><div class="start-header">NEXUS<span>OS</span><small>Simulação educacional</small></div><div class="start-search">⌕ &nbsp; Aplicativos instalados</div><div class="start-apps"><button data-open="game">🧩 Descriptografador</button><button data-open="explorer">📁 Explorador de Arquivos</button><button data-open="terminal">›_ Terminal</button><button data-open="notes">📝 Bloco de Notas</button><button data-open="vpn">🛡️ VPN Nexus</button><button data-open="browser">🌐 Chrome</button></div><div class="start-footer">👤 Hacker <span>● Online (simulação)</span></div></div>
+
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+    <footer class="taskbar"><button id="startButton" class="task-button windows-icon" title="Iniciar" aria-label="Menu Iniciar"><span class="win-logo"><i></i><i></i><i></i><i></i></span></button><span class="task-divider"></span><button class="task-button" data-open="explorer" title="Explorador">📁</button><button class="task-button" data-open="game" title="Cruzadinha">🧩</button><button class="task-button" data-open="terminal" title="Terminal">›_</button><button class="task-button" data-open="notes" title="Bloco de Notas">📝</button><button class="task-button" data-open="vpn" title="VPN Nexus">🛡️</button><button class="task-button" data-open="browser" title="Chrome">🌐</button><div class="task-right"><span>◈ &nbsp; ◖))</span><span id="clock">00:00<br>21/11/2026</span></div></footer>
+  </div>
+  <div class="win-overlay hidden defeat-overlay" id="defeatModal" role="alertdialog" aria-modal="true" aria-labelledby="defeatTitle">
+    <div class="victory-dialog defeat-dialog"><div class="titlebar"><div class="window-title">⚠ ALERTA DE SEGURANÇA — NEXUS OS</div></div>
+      <div class="victory-body"><div class="defeat-symbol">!</div><h2 id="defeatTitle">CONEXÃO RASTREADA!</h2>
+      <p>Seu endereço fictício foi identificado pelos registros deixados no sistema. A operação falhou.</p>
+      <strong class="defeat-percent">RASTREAMENTO: 100%</strong>
+      <p>Você perdeu esta partida. Reinicie para tentar novamente, usando menos dicas.</p>
+      <button type="button" class="primary" id="retryButton">↻ TENTAR NOVAMENTE</button></div></div>
+  </div>
+  <div class="win-overlay hidden" id="victoryModal" role="dialog" aria-modal="true" aria-labelledby="victoryTitle"><div class="victory-dialog"><div class="titlebar"><div class="window-title">✅ Acesso total — Banco Nexus</div><button id="closeVictory" aria-label="Fechar resultado">×</button></div><div class="victory-body"><div class="victory-symbol">✓</div><h2 id="victoryTitle">INVASÃO CONCLUÍDA COM SUCESSO</h2><p>Todos os 16 componentes foram identificados na cruzadinha e as pastas foram liberadas.</p><div class="victory-amount"><small>FRAUDE IDENTIFICADA (FICTÍCIA)</small><strong>R$ 12.480.000,00</strong></div><p>Missão concluída, hacker! Explore os arquivos desbloqueados no Windows simulado.</p><button class="primary" id="victoryExplorer">Abrir Explorador</button></div></div></div>
+</body>
 </html>
